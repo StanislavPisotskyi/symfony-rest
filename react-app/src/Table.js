@@ -30,21 +30,51 @@ export default class Table extends Component
 
     }
 
+    deleteFromDB(id)
+    {
+        fetch('http://localhost:8000/posts/' + id, {
+            method: 'DELETE',
+            mode: 'CORS'
+        }).then(res => {
+            return res;
+        }).catch(err => err);
+
+        return true;
+    }
+
+    deleteItem(id)
+    {
+        if(this.deleteFromDB(id))
+        {
+            _.remove(this.state.blogPosts, blogPosts => blogPosts.id === id);
+            this.setState({blogPosts: this.state.blogPosts});
+        }
+    }
+
     list()
     {
         var props = _.omit(this.state, 'blogPosts');
-        return _.map(this.state.blogPosts, (blogPosts, index) => <TableBody key={index} {...blogPosts} {...props} />);
+        return _.map(this.state.blogPosts, (blogPosts, index) => <TableBody
+            key={index}
+            {...blogPosts}
+            deleteItem={this.deleteItem.bind(this)}
+            {...props} />);
     }
 
     render()
     {
         return(
-            <table>
-                <TableHeader />
-                <tbody>
+            <div>
+                <div>
+                    <a className="btn btn-default btn-sm" href="/posts/create">Create new post</a>
+                </div>
+                <table>
+                    <TableHeader />
+                    <tbody>
                     {this.list()}
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         );
     }
 }

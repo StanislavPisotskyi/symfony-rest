@@ -12,7 +12,7 @@ export default class TableBody extends Component
                 <td>{this.props.title}</td>
                 <td>
                     <a href={update_url} className="btn btn-default btn-sm">Edit</a>
-                    <a href="#" className="btn btn-danger btn-sm">Delete</a>
+                    <button onClick={this.props.deleteItem.bind(this, this.props.id)} className="btn btn-danger btn-sm">Delete</button>
                 </td>
             </tr>
         );

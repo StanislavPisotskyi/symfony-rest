@@ -5,8 +5,8 @@ const Form = React.createClass({
     getInitialState()
     {
         return {
-            body: this.props.body || 'Some text',
-            title: this.props.title || 'Some title'
+            body: this.props.body || '',
+            title: this.props.title || ''
         }
     },
 
