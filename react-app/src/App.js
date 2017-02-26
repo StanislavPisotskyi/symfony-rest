@@ -1,29 +1,20 @@
 import React, { Component } from 'react';
 import Table from './Table';
+import PageNotFound from './PageNotFound';
+import { Router, Route, IndexRoute, browserHistory, IndexRedirect } from 'react-router';
 
 export default class App extends Component
 {
-  constructor(props)
-  {
-    super(props);
-    this.state = {
-      blogPosts: []
-    };
-    fetch('http://localhost:8000/posts', {
-      method: 'GET',
-      mode: 'CORS'
-    }).then(res => res.json())
-        .then(data => {
-          this.setState({
-            blogPosts: data
-          })
-        }).catch(err => err);
-  }
-
   render()
   {
     return (
-        <Table blogPosts={this.state.blogPosts} />
+        <Router history={browserHistory}>
+          <Route path="/" component={Table}>
+            <IndexRedirect to="/posts"/>
+          </Route>
+          <Route path="/posts" component={Table}/>
+          <Route path="*" component={PageNotFound}/>
+        </Router>
     );
   }
 }

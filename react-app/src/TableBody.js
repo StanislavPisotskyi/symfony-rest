@@ -10,7 +10,7 @@ export default class TableBody extends Component
                 <td>{this.props.title}</td>
                 <td>
                     <a href="#" className="btn btn-default btn-sm">Edit</a>
-                    <a href="#" className="btn btn-danger btn-sm"> Delete</a>
+                    <a href="#" className="btn btn-danger btn-sm">Delete</a>
                 </td>
             </tr>
         );
