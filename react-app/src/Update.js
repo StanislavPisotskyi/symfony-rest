@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Form from './Form';
+import { browserHistory } from 'react-router';
 
 export default class Update extends Component
 {
@@ -36,7 +37,8 @@ export default class Update extends Component
             }
         }).then(res => {
             return res;
-        }).catch(err => err)
+        }).catch(err => err);
+        browserHistory.push('/');
     }
 
     render()
