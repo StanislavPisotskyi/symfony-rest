@@ -54,3 +54,5 @@ web/blog/*
 
 # Documentation Temp Files
 *.~vsdx
+
+react-app/node_modules
