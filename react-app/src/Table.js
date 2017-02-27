@@ -62,7 +62,7 @@ export default class Table extends Component
                 <table>
                     <TableHeader />
                     <tbody>
-                    {this.list()}
+                    {(this.state.blogPosts.length > 0) ? this.list() : <tr><td>Loading...</td></tr>}
                     </tbody>
                 </table>
             </div>

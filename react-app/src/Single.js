@@ -27,13 +27,28 @@ export default class Single extends Component
         this.getPost();
     }
 
+    renderPost()
+    {
+        if(Object.keys(this.state.blogPost).length == 0)
+        {
+            return(
+                <div>Loading...</div>
+            );
+        } else
+        {
+            return(
+                <div>
+                    <h3>{this.state.blogPost.title}</h3>
+                    <p>{this.state.blogPost.body}</p>
+                </div>
+            );
+        }
+    }
+
     render()
     {
         return(
-            <div>
-                <h3>{this.state.blogPost.title}</h3>
-                <p>{this.state.blogPost.body}</p>
-            </div>
+            this.renderPost()
         );
     }
 }
