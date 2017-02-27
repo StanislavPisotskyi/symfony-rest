@@ -2,20 +2,22 @@ import React, { Component } from 'react';
 import TableHeader from './TableHeader';
 import TableBody from './TableBody';
 import _ from 'lodash';
+import { fetchGetPosts, fetchDeletePost } from './actions';
 
 export default class Table extends Component
 {
     getPosts()
     {
-        fetch('http://localhost:8000/posts', {
-            method: 'GET',
-            mode: 'CORS'
-        }).then(res => res.json())
-            .then(data => {
-                this.setState({
-                    blogPosts: data
+        fetchGetPosts()
+            .then((data) => {
+                this.setState(state => {
+                    state.blogPosts = data;
+                    return state;
                 })
-            }).catch(err => err);
+            })
+            .catch((err) => {
+                console.error('err', err);
+            });
     }
 
     constructor(props)
@@ -32,17 +34,12 @@ export default class Table extends Component
 
     componentDidUpdate()
     {
-        this.getPosts();
+       this.getPosts();
     }
 
     deleteItem(id)
     {
-        fetch('http://localhost:8000/posts/' + id, {
-            method: 'DELETE',
-            mode: 'CORS'
-        }).then(res => {
-            return res;
-        }).catch(err => err);
+        fetchDeletePost(id);
     }
 
     list()

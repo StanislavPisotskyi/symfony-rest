@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
+import { fetchGetPost } from './actions';
 
 export default class Single extends Component
 {
     getPost()
     {
-        fetch('http://localhost:8000/posts/' + this.props.params.postId, {
-            method: 'GET',
-            mode: 'CORS'
-        }).then(res => res.json())
-            .then(data => {
-                this.setState({
-                    blogPost: data
-                })
-            }).catch(err => err);
+        fetchGetPost(this.props.params.postId)
+            .then((data) => {
+                this.setState(state => {
+                    state.blogPost = data;
+                    return state;
+                });
+            })
+            .catch((err) => {
+                console.error('err', err);
+            });
     }
 
     constructor(props)

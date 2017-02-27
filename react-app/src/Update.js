@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import Form from './Form';
 import { browserHistory } from 'react-router';
+import { fetchGetPost, fetchUpdatePost } from './actions';
 
 export default class Update extends Component
 {
     getPost()
     {
-        fetch('http://localhost:8000/posts/' + this.props.params.postId, {
-            method: 'GET',
-            mode: 'CORS'
-        }).then(res => res.json())
-            .then(data => {
-                this.setState({
-                    blogPost: data
-                })
-            }).catch(err => err);
+        fetchGetPost(this.props.params.postId)
+            .then((data) => {
+                this.setState(state => {
+                    state.blogPost = data;
+                    return state;
+                });
+            })
+            .catch((err) => {
+                console.error('err', err);
+            });
     }
 
     constructor(props)
@@ -28,16 +30,7 @@ export default class Update extends Component
     }
 
     handleSubmit(data) {
-        fetch('http://localhost:8000/posts/' + this.props.params.postId, {
-            method: 'PUT',
-            mode: 'CORS',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => {
-            return res;
-        }).catch(err => err);
+        fetchUpdatePost(this.state.blogPost.id, data);
         browserHistory.push('/');
     }
 

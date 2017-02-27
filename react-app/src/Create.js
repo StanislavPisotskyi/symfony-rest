@@ -1,21 +1,13 @@
 import React, { Component } from 'react';
 import Form from './Form';
 import { browserHistory } from 'react-router';
+import { fetchCreatePost } from './actions';
 
 export default class Create extends Component
 {
     handleSubmit(data)
     {
-        fetch('http://localhost:8000/posts', {
-            method: 'POST',
-            mode: 'CORS',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(res => {
-            return res;
-        }).catch(err => err);
+        fetchCreatePost(data);
         browserHistory.push('/');
     }
 
