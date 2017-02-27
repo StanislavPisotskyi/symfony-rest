@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Table from './Table';
 import Create from './Create';
 import Update from './Update';
+import Single from './Single';
 import PageNotFound from './PageNotFound';
 import { Router, Route, IndexRoute, browserHistory, IndexRedirect } from 'react-router';
 
@@ -17,6 +18,7 @@ export default class App extends Component
           <Route path="/posts" component={Table}/>
           <Route path="/posts/create" component={Create}/>
           <Route path="/posts/update/:postId" component={Update}/>
+          <Route path="/posts/single/:postId" component={Single}/>
           <Route path="*" component={PageNotFound}/>
         </Router>
     );
