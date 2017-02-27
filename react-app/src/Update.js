@@ -34,14 +34,29 @@ export default class Update extends Component
         browserHistory.push('/');
     }
 
+    renderForm()
+    {
+        if(Object.keys(this.state.blogPost).length == 0)
+        {
+            return(
+                <div>Loading...</div>
+            );
+        } else
+        {
+            return(
+                <div>
+                    <Form onSubmit={this.handleSubmit.bind(this)}
+                          title={this.state.blogPost.title}
+                          body={this.state.blogPost.body} />
+                </div>
+            );
+        }
+    }
+
     render()
     {
         return (
-            <div>
-                <Form onSubmit={this.handleSubmit.bind(this)}
-                      title={this.state.blogPost.title}
-                      body={this.state.blogPost.body} />
-            </div>
+            this.renderForm()
         );
     }
 }
