@@ -30,7 +30,12 @@ export default class Table extends Component
 
     }
 
-    deleteFromDB(id)
+    componentDidUpdate()
+    {
+        this.getPosts();
+    }
+
+    deleteItem(id)
     {
         fetch('http://localhost:8000/posts/' + id, {
             method: 'DELETE',
@@ -38,17 +43,6 @@ export default class Table extends Component
         }).then(res => {
             return res;
         }).catch(err => err);
-
-        return true;
-    }
-
-    deleteItem(id)
-    {
-        if(this.deleteFromDB(id))
-        {
-            _.remove(this.state.blogPosts, blogPosts => blogPosts.id === id);
-            this.setState({blogPosts: this.state.blogPosts});
-        }
     }
 
     list()
